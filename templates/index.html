@@ -106,15 +106,20 @@
                             <li>
             <h2>✅ ${bucket}</h2>
             <button onclick="delete_bucket(${num})" type="button" class="btn btn-outline-primary">Delete</button>
-            <button onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary">Done</button>
-        </li> 
+            <button style="margin-left: 5px" onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary">Done</button>
+            </li> 
         `;
                         } else {
                             temp_html = `
                             <li>
-            <h2 class="done">✅ ${bucket}</h2>
-        </li> 
-        `;
+             <h2 class="done">✅ ${bucket}</h2>
+             <button onclick="delete_bucket(${num})" type="button" class="btn btn-outline-primary"> Delete!</button>
+
+              <button style="margin-left: 5px" onclick="done_bucket(${num})" type="button" class="btn btn-outline-primary"> Done!</button>
+
+
+             </li> 
+             `;
                         }
                         $('#bucket-list').append(temp_html);
                     }
@@ -145,15 +150,16 @@
             });
         }
 
-        function delete_bucket() {
+
+        function delete_bucket(num) {
             $.ajax({
                 type: "POST",
-                url: "/bucket/delete",
-                data: { num_give: num },
+                url: "/delete",
+                data: { 'num_give': num },
                 success: function (response) {
-                    alert(response["msg"]);
-                    window.location.reload();
-                }
+                    alert(response["msg"])
+                    window.location.reload()
+                },
             });
         }
 
